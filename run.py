@@ -1,4 +1,15 @@
-# Import Section
+""" Import Section """
+# import os to clear the terminal to play game again
+import os
+
+# import pyfiglet to display ascii title text
+import pyfiglet
+
+# import colorama to add colour
+import colorama
+from colorama import Fore
+colorama.init(autoreset=True)
+
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -19,4 +30,12 @@ easy = SHEET.worksheet('easy')
 medium = SHEET.worksheet('medium')
 hard = SHEET.worksheet('hard')
 
-data = easy.get_all_values()
+# data = easy.get_all_values()
+
+def clear():
+    """
+    Clear the screen for the player
+    """
+    os.system('clear')
+
+def display_snake_title
