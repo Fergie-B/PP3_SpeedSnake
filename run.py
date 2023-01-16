@@ -1,5 +1,7 @@
+# Import Section
 import gspread
 from google.oauth2.service_account import Credentials
+
 
 # Scope Code to call Google Drive
 SCOPE = [
@@ -18,5 +20,3 @@ medium = SHEET.worksheet('medium')
 hard = SHEET.worksheet('hard')
 
 data = easy.get_all_values()
-
-print(data)
