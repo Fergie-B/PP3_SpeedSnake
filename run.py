@@ -21,25 +21,3 @@ hard = SHEET.worksheet('hard')
 data = easy.get_all_values()
 
 print(data)
-
-
-def clear():
-    """
-    # Clear the screen for the player
-    """
-    os.system('clear')
-
-
-def display_snake_title():
-    """
-    Title Page Display
-    """
-    title = pyfiglet.figlet_format(
-        "SpeedSnake", font="slant", justify="center")
-    print(title)
-
-    subtitle = pyfiglet.figlet_format(
-        "Play Snake", font="standard", justify="center")
-    print(subtitle)
-
-    print(Fore.RED + "Developed by Barry Ferguson".center(60) + "\n")
