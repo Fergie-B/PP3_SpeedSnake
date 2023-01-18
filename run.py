@@ -39,8 +39,9 @@ curses.curs_set(0)
 
 
 # Set Snake and Food Start positions
-snake_head = [10,10]
-food_position = [15,15]
+snake_head = [10,15]
+body_position = [[15,10],[14,10],[13,10]]
+food_position = [20,20]
 score = 0 
 
 # Show the Food on screen
@@ -51,3 +52,19 @@ prev_button_direction = 1
 button_direction = 1
 key = curses.KEY_RIGHT
 
+# Set up conditions to end game 
+def hit_wall(snake_head):
+    """
+    If statement if snake head collides with a boundary wall
+    """
+    if snake_head[0]>=h-1 or snake_head[0]<=0 or snake_head[1]>=w-1 or snake_head[1]<=0 :
+        return 1
+    else:
+        return 0
+
+def hit_self(body_position):
+    snake_head = body_position[0]
+    if snake_head in body_position[1:]:
+        return 1
+    else:
+        return 0
