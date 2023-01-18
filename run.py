@@ -63,8 +63,26 @@ def hit_wall(snake_head):
         return 0
 
 def hit_self(body_position):
+    """
+    If statement for when snake collides with own body
+    """
     snake_head = body_position[0]
     if snake_head in body_position[1:]:
         return 1
     else:
         return 0
+
+# Set gameplay border an keyboard inputs
+a = []
+while True:
+    win.border(0)
+    win.timeout(100)
+
+    next_key = win.getch()
+    """
+    variable to get user input from a keyboard
+    """
+    if next_key == -1:
+         key = key
+    else:
+        key = next_key
