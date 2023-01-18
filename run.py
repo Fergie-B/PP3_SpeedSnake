@@ -86,3 +86,26 @@ while True:
          key = key
     else:
         key = next_key
+
+# Define Numerical Keyboard inputs to move Snake around the screen
+    if key == curses.KEY_LEFT and prev_button_direction != 1:
+        button_direction = 0
+    elif key == curses.KEY_RIGHT and prev_button_direction != 0:
+        button_direction = 1
+    elif key == curses.KEY_UP and prev_button_direction != 2:
+        button_direction = 3
+    elif key == curses.KEY_DOWN and prev_button_direction != 3:
+        button_direction = 2
+    else:
+        pass
+
+    prev_button_direction = button_direction
+
+    if button_direction == 1:
+        snake_head[1] += 1
+    elif button_direction == 0:
+        snake_head[1] -= 1
+    elif button_direction == 2:
+        snake_head[0] +- 1
+    elif button_direction == 3:
+        snake_head[0] -= 1
