@@ -20,12 +20,13 @@ data = scorelog.get_all_values()
 
 print(data)
 
+""" Import Section 2 """
+
 # import random module
 import random
 
 # import curses module
 import curses
-from curses import KEY_RIGHT, KEY_LEFT, KEY_DOWN, KEY_UP
 
 import time
 
@@ -40,9 +41,9 @@ curses.curs_set(0)
 
 
 # Set Snake and Food Start positions
-snake_head = [10,15]
-body_position = [[15,10],[14,10],[13,10]]
-food_position = [20,20]
+snake_head = [10, 15]
+body_position = [[15, 10], [14, 10], [13, 10]]
+food_position = [20, 20]
 score = 0 
 
 # Show the Food on screen
@@ -53,7 +54,7 @@ prev_button_direction = 1
 button_direction = 1
 key = curses.KEY_RIGHT
 
-# 
+# Function to add to score when snake eats the food
 def get_food(score):
     food_position = [random.randint(1,h-2), random.randint(1,w-2)]
     score += 1
@@ -117,4 +118,18 @@ while True:
     elif button_direction == 3:
         snake_head[0] -= 1
 
+    # Increase the Snakes Body length when the food is ate
+    if snake_head == food_position:
+        food_position, score = get_food(score)
+        body_position.insert(0, list(snake_head))
+        a.append(food_position)
+        win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
 
+    else:
+        body_position.insert(0, list(snake_head))
+        last = body_position.pop()
+        win.addch(last[0], last[1], ' ')
+
+    win.addch(body_position[0][0], body_position[0][1], '#')
+
+    
