@@ -25,6 +25,7 @@ import random
 
 # import curses module
 import curses
+from curses import KEY_RIGHT, KEY_LEFT, KEY_DOWN, KEY_UP
 
 import time
 
@@ -51,6 +52,12 @@ print(food_position)
 prev_button_direction = 1
 button_direction = 1
 key = curses.KEY_RIGHT
+
+# 
+def get_food(score):
+    food_position = [random.randint(1,h-2), random.randint(1,w-2)]
+    score += 1
+    print(food_position, score)
 
 # Set up conditions to end game 
 def hit_wall(snake_head):
@@ -87,7 +94,7 @@ while True:
     else:
         key = next_key
 
-# Define Numerical Keyboard inputs to move Snake around the screen
+# Define  Keyboard inputs to move Snake around the screen
     if key == curses.KEY_LEFT and prev_button_direction != 1:
         button_direction = 0
     elif key == curses.KEY_RIGHT and prev_button_direction != 0:
@@ -109,3 +116,5 @@ while True:
         snake_head[0] +- 1
     elif button_direction == 3:
         snake_head[0] -= 1
+
+
