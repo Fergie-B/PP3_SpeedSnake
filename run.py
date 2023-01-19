@@ -1,4 +1,13 @@
 """ Import Section """
+
+# import random module
+import random
+
+# import curses module
+import curses
+
+import time
+
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -19,16 +28,6 @@ scorelog = SHEET.worksheet('scorelog')
 data = scorelog.get_all_values()
 
 print(data)
-
-""" Import Section 2 """
-
-# import random module
-import random
-
-# import curses module
-import curses
-
-import time
 
 
 # set up screen
@@ -130,6 +129,7 @@ while True:
         last = body_position.pop()
         win.addch(last[0], last[1], ' ')
 
+    # Display snake on screen
     win.addch(body_position[0][0], body_position[0][1], '#')
 
     
