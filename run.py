@@ -140,4 +140,10 @@ while True:
    
 # Display Player Score
 setup.addstr(10, 30, "Score:   " +str(score))
+setup.refresh()
+time.sleep(2)
+# Close the Game Window
+curses.endwin()
+print(a)
+print(w,h)
     
