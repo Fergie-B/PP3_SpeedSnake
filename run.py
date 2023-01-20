@@ -8,6 +8,7 @@ import curses
 
 import time
 
+# Imports gspread function for logging username and logging scores
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -39,7 +40,7 @@ win.keypad(1)
 curses.curs_set(0)
 
 
-# Set Snake and Food Start positions
+# Variables to Set Snake and Food Start positions
 snake_head = [10, 15]
 body_position = [[15, 10], [14, 10], [13, 10]]
 food_position = [20, 20]
@@ -49,6 +50,7 @@ score = 0
 win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
 print(food_position)
 
+# 
 prev_button_direction = 1
 button_direction = 1
 key = curses.KEY_RIGHT
@@ -59,7 +61,7 @@ def get_food(score):
     score += 1
     print(food_position, score)
 
-# Set up conditions to end game 
+# Functions to end game when Snake hits wall or itself
 def hit_wall(snake_head):
     """
     If statement if snake head collides with a boundary wall
@@ -131,5 +133,10 @@ while True:
 
     # Display snake on screen
     win.addch(body_position[0][0], body_position[0][1], '#')
+
+    # If Statement When Snake hits a wall or its own body activate Game Over
+    if hit_wall(snake_head) == 1 or hit_self(body_position) == 1:
+        break
+   
 
     
