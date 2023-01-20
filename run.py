@@ -36,6 +36,8 @@ setup = curses.initscr()
 h, w = setup.getmaxyx()
 win = curses.newwin(h, w, 0, 0)
 
+
+
 win.keypad(1)
 curses.curs_set(0)
 
