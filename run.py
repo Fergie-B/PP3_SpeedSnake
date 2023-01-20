@@ -59,7 +59,7 @@ key = curses.KEY_RIGHT
 def get_food(score):
     food_position = [random.randint(1,h-2), random.randint(1,w-2)]
     score += 1
-    print(food_position, score)
+    return(food_position, score)
 
 # Functions to end game when Snake hits wall or itself
 def hit_wall(snake_head):
@@ -138,5 +138,6 @@ while True:
     if hit_wall(snake_head) == 1 or hit_self(body_position) == 1:
         break
    
-
+# Display Player Score
+setup.addstr(10, 30, "Score:   " +str(score))
     
