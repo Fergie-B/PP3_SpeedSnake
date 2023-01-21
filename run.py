@@ -6,6 +6,7 @@ import random
 # import curses module
 import curses
 
+# import time module
 import time
 
 # Imports gspread function for logging username and logging scores
@@ -32,60 +33,59 @@ scorelog = SHEET.worksheet('scorelog')
 
 def enter_username():
     """
-    Prompt Player to enter username to start game and log it to Google Worksheet
+    Prompt Player to enter username to start game
     Max length 15 Characters
     """
     while True:
         enter_username = input("Please enter your name: \n")
-        if len(enter_username) > 15:
-            print("Username too long - Max 15 Characters")
-        elif len(enter_username) <= 15:
+        if len(enter_username) <= 15:
             print("Welcome", enter_username, "!")
-            start_game()
+            break
+        else:
+            print("Username too long - Max 15 Characters")
+        continue
 
 enter_username()
 
 
-class start_game():
-    """
-    Variables to start game
-    """
-    h, w = (curses.initscr()).getmaxyx()
-    win = curses.newwin(h, w, 0, 0)
-    win.keypad(1)
-    curses.curs_set(0)
+h, w = (curses.initscr()).getmaxyx()
+win = curses.newwin(h, w, 0, 0)
+win.keypad(1)
+curses.curs_set(0)
 
-    # Variables to Set Snake and Food Start positions
-    snake_head = [10, 15]
-    body_position = [[15, 10], [14, 10], [13, 10]]
-    food_position = [20, 20]
-    score = 0
+# Variables to Set Snake and Food Start positions
+snake_head = [10, 15]
+body_position = [[15, 10], [14, 10], [13, 10]]
+food_position = [20, 20]
+score = 0
 
-    # Show the Food on screen
-    win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
-    print(food_position)
+# Show the Food on screen
+win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
+print(food_position)
 
-    # 
-    prev_button_direction = 1
-    button_direction = 1
-    key = curses.KEY_RIGHT
+# 
+prev_button_direction = 1
+button_direction = 1
+key = curses.KEY_RIGHT
 
 
 # Function to add to score when snake eats the food
 def get_food(score):
-    food_position = [random.randint(1,h-2),random.randint(1,w-2)]
+    food_position = [random.randint(1, h-2), random.randint(1, w-2)]
     score += 1
     return food_position, score
+
 
 # Functions to end game when Snake hits wall or itself
 def hit_wall(snake_head):
     """
     If statement if snake head collides with a boundary wall
     """
-    if snake_head[0] >= h-1 or snake_head[0] <= 0 or snake_head[1] >=w-1 or snake_head[1] <= 0:
+    if snake_head[0] >= h-1 or snake_head[0] <= 0 or snake_head[1] >= w-1 or snake_head[1] <= 0:
         return 1
     else:
         return 0
+
 
 def hit_self(body_position):
     """
@@ -96,6 +96,7 @@ def hit_self(body_position):
         return 1
     else:
         return 0
+
 
 # Set gameplay border an keyboard inputs
 a = []
@@ -108,9 +109,10 @@ while True:
     variable to get user input from a keyboard
     """
     if next_key == -1:
-         key = key
+        key = key
     else:
         key = next_key
+
 
 # Define  Keyboard inputs to move Snake around the screen
     if key == curses.KEY_LEFT and prev_button_direction != 1:
@@ -155,10 +157,10 @@ while True:
         break
    
 # Display Player Score
-(curses.initscr()).addstr(10, 30, "Score:   " +str(score))
+(curses.initscr()).addstr(10, 30, "Score:   " + str(score))
 (curses.initscr()).refresh()
 time.sleep(2)
 # Close the Game Window
 curses.endwin()
 print(a)
-print(w,h)
+print(w, h)
