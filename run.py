@@ -20,6 +20,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
+# Scope for Data Handling - From Code Institute - Love Sandwiches Walkthrough
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -27,41 +28,46 @@ SHEET = GSPREAD_CLIENT.open('speed_snake_scores')
 
 scorelog = SHEET.worksheet('scorelog')
 
-# data = scorelog.get_all_values()
+data = scorelog.get_all_values()
 
 # print(data)
 
+
+# Function to allow user to enter a username
 def enter_username():
     """
     Prompt Player to enter username to start game
     Max length 15 Characters
     """
     while True:
-        enter_username = input("Please enter your name: \n")
-        if len(enter_username) <= 15:
-            print("Welcome", enter_username, "!")
+        username = input("Please enter your name: \n")
+        if len(username) <= 15:
+            return("Welcome", username, "!")
             break
         else:
             print("Username too long - Max 15 Characters")
         continue
 
+
 enter_username()
 
 
-h, w = (curses.initscr()).getmaxyx()
+# Variables to initialize Gameplay
+curses.initscr()
+h = 24
+w = 80
 win = curses.newwin(h, w, 0, 0)
 win.keypad(1)
 curses.curs_set(0)
+score = 0
 
 # Variables to Set Snake and Food Start positions
 snake_head = [10, 15]
 body_position = [[15, 10], [14, 10], [13, 10]]
 food_position = [20, 20]
-score = 0
 
 # Show the Food on screen
 win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
-print(food_position)
 
 # 
 prev_button_direction = 1
@@ -69,10 +75,18 @@ button_direction = 1
 key = curses.KEY_RIGHT
 
 
+# Function to display score on top bar
+def display_score(win, score):
+    h, w = newwin.getmaxyx()
+    score = 0
+    win.addstr(0, 0, "Score: " + str(score))
+
+display_score()
+
 # Function to add to score when snake eats the food
 def get_food(score):
     food_position = [random.randint(1, h-2), random.randint(1, w-2)]
-    score += 1
+    score += 10
     return food_position, score
 
 
@@ -103,7 +117,6 @@ a = []
 while True:
     win.border(0)
     win.timeout(100)
-
     next_key = win.getch()
     """
     variable to get user input from a keyboard
@@ -156,8 +169,8 @@ while True:
     if hit_wall(snake_head) == 1 or hit_self(body_position) == 1:
         break
    
-# Display Player Score
-(curses.initscr()).addstr(10, 30, "Score:   " + str(score))
+# Display Player Score at Game Over Screen
+(curses.initscr()).addstr(10, 20, "Congratulations you scored:" + str(score) + "points!")
 (curses.initscr()).refresh()
 time.sleep(2)
 # Close the Game Window
