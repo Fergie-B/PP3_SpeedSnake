@@ -41,29 +41,34 @@ def enter_username():
             print("Username too long - Max 15 Characters")
         elif len(enter_username) <= 15:
             print("Welcome")
+            start_game()
+
+enter_username()
 
 
-# set up screen
-h, w = (curses.initscr()).getmaxyx()
-win = curses.newwin(h, w, 0, 0)
-win.keypad(1)
-curses.curs_set(0)
+class start_game():
+    """
+    Variables to start game
+    """
+    h, w = (curses.initscr()).getmaxyx()
+    win = curses.newwin(h, w, 0, 0)
+    win.keypad(1)
+    curses.curs_set(0)
 
+    # Variables to Set Snake and Food Start positions
+    snake_head = [10, 15]
+    body_position = [[15, 10], [14, 10], [13, 10]]
+    food_position = [20, 20]
+    score = 0
 
-# Variables to Set Snake and Food Start positions
-snake_head = [10, 15]
-body_position = [[15, 10], [14, 10], [13, 10]]
-food_position = [20, 20]
-score = 0
+    # Show the Food on screen
+    win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
+    print(food_position)
 
-# Show the Food on screen
-win.addch(food_position[0], food_position[1], curses.ACS_BULLET)
-print(food_position)
-
-# 
-prev_button_direction = 1
-button_direction = 1
-key = curses.KEY_RIGHT
+    # 
+    prev_button_direction = 1
+    button_direction = 1
+    key = curses.KEY_RIGHT
 
 
 # Function to add to score when snake eats the food
