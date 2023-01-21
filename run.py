@@ -40,7 +40,7 @@ def enter_username():
         if len(enter_username) > 15:
             print("Username too long - Max 15 Characters")
         elif len(enter_username) <= 15:
-            print("Welcome")
+            print("Welcome", enter_username, "!")
             start_game()
 
 enter_username()
