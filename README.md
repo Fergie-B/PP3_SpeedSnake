@@ -1,4 +1,4 @@
-# Speed Snake
+# Speed Snake - unfinished project - discussed with Student Care. 23012023
 (Developer: Barry Ferguson)
 
 ![Mockup image](docs/am-i-responsive.png)
